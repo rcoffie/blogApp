@@ -1,0 +1,130 @@
+{% extends 'base2.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fliud">
+  <div class="row">
+    <div class="col-md-3">
+      Author Dashboard 
+     <hr>
+      
+
+     <div class="dropdown show">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+    <hr>
+
+    <div class="dropdown show">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+
+     
+
+    </div>
+
+    <div class="col-md-9 ">
+      <div class="row m-4">
+        <div class="col-md-4">
+
+          <div class="card bg-info text-white" >
+            <div class="card-body ">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, id. Impedit accusamus unde aspernatur dolor, quidem odio illo doloribus fugit et, dolorem fuga debitis explicabo dolores quibusdam quisquam veniam officia?</p>
+              
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4 ">
+
+          <div class="card bg-primary text-white" >
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nesciunt ipsa aliquam ab, similique, nostrum magnam tempora expedita laudantium facilis reprehenderit harum aliquid. Debitis quibusdam in aut praesentium sunt?</p>
+              
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+
+          <div class="card bg-danger text-white" >
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore sit, fugit ipsam ab fuga eius repellendus enim natus minus quis, cum, similique consectetur illum veniam beatae obcaecati vel exercitationem temporibus.</p>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+                <h1> Update Post</h1>
+          <form action='' method='POST' enctype="multipart/form-data" class="m-4">
+           {% csrf_token %}
+           
+           {{  updateForm | crispy }}
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+        
+          
+        </div>
+        <div class="col-md-6">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+              
+                <th scope="col">Post Titles</th>
+                <th scope="col">Actions </th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if posts %}
+              {% for post in posts %}
+              <tr>
+               
+                <td>{{ post.title }}</td>
+                <td>Edit</td>
+                <td>Update</td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+              
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
