@@ -1,15 +1,23 @@
 from django.shortcuts import render
 from .models import *
-
+from django.db.models import Q
+from django.core.paginator import Paginator
 # Create your views here.
 
 
 def Home(request):
   featured_post = Post.objects.all().filter(featured_post=True)[:1]
-  posts = Post.objects.all()
+  posts_list = Post.objects.all()
+  paginator = Paginator(posts_list,6)
   query = request.GET.get('q')
   if query:
-    posts=Post.objects.all().filter(title__icontains=query)
+    posts_list=Post.objects.all().filter(
+      Q(title__icontains=query)|
+      Q(body__icontains=query)
+    
+    )
+  page_number = request.GET.get('page')
+  posts = paginator.get_page(page_number)
   context = {'posts':posts,'featured_post':featured_post}
   return render(request,'blog/index.html',context)
 
