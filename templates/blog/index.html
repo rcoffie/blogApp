@@ -101,17 +101,31 @@
             <div class="media">
               
               <div class="media-content">
-                <p class="title is-4">{{ post.title }}</p>
-                <p class="subtitle is-6"> <a href="{% url 'detail' post.id %}"> {{ post.date_posted }}</a> </p>
+                <p class="title is-4"> <a href="{% url 'detail' post.id %}"> {{ post.title }} </a>  </p>
+                
               </div>
             </div>
         
             <div class="content">
-             {{post.body|truncatewords:20 }}
-              <a href="#">#css</a> <a href="#">{{ post.author }}</a>
+             {{post.body| truncatewords:20 }}
+              
               <br>
-              <time datetime="2016-1-1">{{ post.date_post | timesince }}</time>
+             
+              <p class="subtitle is-6"> Post by: {{ post.author }} <br> <time datetime="{{ post.date_posted | timesince}}" >  <small> Post Date: {{ post.date_posted | timesince}} </small>  </time> </p>
             </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                 Author: <a href="https://twitter.com/codinghorror/status/506010907021828096">{{ post.author }}</a> 
+                </span>
+              </p>
+              <p class="card-footer-item">
+                <span>
+                  Date: <a href="#">{{ post.date_posted | timesince }}</a> 
+                </span>
+              </p>
+            </footer>
+          
           </div>
         </div>
 
