@@ -61,7 +61,7 @@
           <span class="tag">Nineteen</span>
           <span class="tag">Twenty</span>
         </div>
-         <form action="  ">
+         <form action="{% url 'home' %}">
         <div class="field has-addons">
           <div class="control  is-expanded ">
             <input class="input" type="text" name='q' placeholder="Find a repository"  required>
@@ -118,8 +118,44 @@
         
       </div>
       {% endfor %}
+
+       
+         <section class="section">  
+
+        <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+          {% if posts.has_previous %}
+          <a href="?page={{ posts.previous_page_number }}" class="pagination-previous">Previous</a>
+          {% endif %}
+
+          {% if posts.has_next %}
+          <a href="?page={{ posts.next_page_number }}" class="pagination-previous">Next</a>
+          {% endif %}
+
+         <!--  <a class="pagination-next">Next page</a> -->
+          <ul class="pagination-list">
+            {% for p in posts.paginator.page_range %}
+            {% if posts.number == p %}
+          
+            <li>
+              <a href="?page={{ p }}" class="pagination-link is-current" aria-label="Goto page 1">{{ p }}</a>
+            </li>
+            {% else %}
+            
+          </li>
+            <a href="?page={{ p }}" class="pagination-link" aria-label="Goto page 1">{{ p }}</a>
+          </li>
+
+            {% endif %}
+            {% endfor %}
+            
+          </ul>
+        </nav>
+
+
+      </section>
       
-  
+      
+     
      
     </div>
   </div>
