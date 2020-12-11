@@ -34,3 +34,19 @@ class Post(models.Model):
 
   class Meta:
     ordering = ['-date_posted']
+
+
+
+class Comment(models.Model):
+  post = models.ForeignKey(Post, on_delete=models.DO_NOTHING)
+  name = models.CharField(max_length=30)
+  content = models.TextField(max_length=100)
+  comment_date = models.DateTimeField(default=datetime.now)
+
+
+  def __str__(self):
+    return self.name
+
+
+
+  

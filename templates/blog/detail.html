@@ -93,6 +93,48 @@
 
  
   </div>
+
+  <div class="container">
+    <div class="columns ">
+      <div class="column is-8 m-4 p-4">
+        <h3>Post Your Comment</h3>
+        <form action="{% url 'detail' post.id %}" method="POST" class="">  
+
+          {% csrf_token %}
+
+        <div class="field mb-4 ">
+          {% csrf_token %}
+          <label for="name"> Name</label>
+          <div class="control">
+            <input class="input is-info" name="name" type="text" placeholder="Your Name" required>
+          </div>
+        
+        <article class="media mt-4">
+          <label for="content" class="m-2"> Comment</label>
+          <div class="media-content">
+            <div class="field">
+              <p class="control">
+                <textarea class="textarea" name="content" placeholder="Add a comment..." required></textarea>
+              </p>
+            </div>
+            <nav class="level">
+              <div class="level-left">
+                <div class="level-item">
+                  
+                  <button class='button is-info' type="submit"> Submit</button>
+                </div>
+              </div>
+              
+            </nav>
+          </div>
+        </article>
+
+      </div>
+
+    </form>
+
+    </div>
+  </div>
 </div>
 
 

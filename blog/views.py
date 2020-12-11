@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,HttpResponseRedirect
 from .models import *
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.urls import reverse
 # Create your views here.
 
 
@@ -23,9 +24,18 @@ def Home(request):
 
 
 
+
 def PostDetail(request, id):
   post = Post.objects.get(id=id)
-  
-  context = {'post':post}
+  comments = Comment.objects.filter(post=post)
+  if request.method== 'POST':
+    name = request.POST['name']
+    content = request.POST['content']
+    comment = Comment.objects.create(name=name,content=content , post=post)
+    comment.save()
+    return HttpResponseRedirect(reverse('detail', args=[post.id]))
+    
+
+  context = {'post':post,'comments':comments}
 
   return render(request,'blog/detail.html',context)
