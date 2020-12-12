@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load humanize %}
 {% block content %}
 <div class="section">
   <div class="container">
@@ -80,7 +80,7 @@
             </p>
             <p class="card-footer-item">
               <span>
-                 <a href="#">{{ post.date_posted }}</a>
+                 <a href="#">{{ post.date_posted | timesince }}</a>
               </span>
             </p>
           </footer>
@@ -150,9 +150,10 @@
             <br>
             {{ comment.content }}
             <br>
-            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+            <small><a>Like</a> · <a>Reply</a>  {{ comment.comment_date | timesince }}</small>
           </p>
         </div>
+        {% if replies %}
     
         <article class="media">
           <figure class="media-left">
@@ -167,7 +168,7 @@
                 <br>
                  reply content 
                 <br>
-                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                <small><a>Like</a> · <a>Reply</a> time </small>
               </p>
             </div>
     
@@ -180,6 +181,7 @@
             </article>
           </div>
         </article>
+        {% endif %}
       {% if replies %}
       {% for reply in replies %}
         <article class="media">
@@ -191,11 +193,11 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <strong> 2ND Reply Name </strong>
+                <strong> <!-- 2ND Reply Name  --></strong>
                 <br>
-                 2nd Reply content
+                <!--  2nd Reply content -->
                 <br>
-                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                <small><a><!-- Like --></a> · <a><!-- Reply --></a> <!-- · 2 hrs --></small>
               </p>
             </div>
           </div>
@@ -204,8 +206,28 @@
         {% endif %}
       </div>
     </article>
+   
+
     {% endfor %}
+
+
+    {% else %}
+
+    <article class="message is-dark">
+      <div class="message-header">
+        <p>Hi there </p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+         <strong>There are no comment for this post, You can be the first  person to comment under this post  </strong> No login required 
+         
+      </div>
+    </article>
+
+
     {% endif %}
+
+  
 
     </div>
   </div>
