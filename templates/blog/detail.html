@@ -133,6 +133,80 @@
 
     </form>
 
+<br>
+{% if comments %}
+{% for comment in comments  %}
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img src="https://bulma.io/images/placeholders/128x128.png">
+        </p>
+      </figure>
+      <div class="media-content">
+
+        <div class="content">
+          <p>
+            <strong>{{ comment.name}}</strong>
+            <br>
+            {{ comment.content }}
+            <br>
+            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+          </p>
+        </div>
+    
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong> Reply Name </strong>
+                <br>
+                 reply content 
+                <br>
+                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+              </p>
+            </div>
+    
+            <article class="media">
+             reply 1
+            </article>
+    
+            <article class="media">
+              reply 2
+            </article>
+          </div>
+        </article>
+      {% if replies %}
+      {% for reply in replies %}
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong> 2ND Reply Name </strong>
+                <br>
+                 2nd Reply content
+                <br>
+                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+              </p>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+    {% endif %}
+
     </div>
   </div>
 </div>
