@@ -40,6 +40,7 @@ class Post(models.Model):
 class Comment(models.Model):
   post = models.ForeignKey(Post, on_delete=models.DO_NOTHING)
   name = models.CharField(max_length=30)
+  # reply = models.ForeignKey('Comment',on_delete=models.DO_NOTHING,null=True,related_name='replies')
   content = models.TextField(max_length=100)
   comment_date = models.DateTimeField(default=datetime.now)
 

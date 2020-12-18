@@ -23,35 +23,15 @@
       </div>
 
       <div class="column is-4">
-      <div class="card">
-        <div class="card-content">
 
-          <div class="tags">
-            <span class="tag">One</span>
-            <span class="tag">Two</span>
-            <span class="tag">Three</span>
-            <span class="tag">Four</span>
-            <span class="tag">Five</span>
-            <span class="tag">Six</span>
-            <span class="tag">Seven</span>
-            <span class="tag">Eight</span>
-            <span class="tag">Nine</span>
-            <span class="tag">Ten</span>
-            <span class="tag">Eleven</span>
-            <span class="tag">Twelve</span>
-            <span class="tag">Thirteen</span>
-            <span class="tag">Fourteen</span>
-            <span class="tag">Fifteen</span>
-            <span class="tag">Sixteen</span>
-            <span class="tag">Seventeen</span>
-            <span class="tag">Eighteen</span>
-            <span class="tag">Nineteen</span>
-            <span class="tag">Twenty</span>
-          </div>
-         
-        </div>
-      
-      </div>
+
+
+        {% include 'partials/category.html' %}
+     
+       {% include 'partials/search_field.html'  %}
+       
+
+  
     </div>
    
     </div>
@@ -144,13 +124,69 @@
       </figure>
       <div class="media-content">
 
-        <div class="content">
+        <div class="content mb-4"> 
           <p>
             <strong>{{ comment.name}}</strong>
             <br>
             {{ comment.content }}
             <br>
-            <small><a>Like</a> · <a>Reply</a>  {{ comment.comment_date | timesince }}</small>
+            <small><a>Like</a> · <a>Reply</a>  {{ comment.comment_date | timesince }}   
+            
+              <div class="dropdown is-hoverable">
+                <div class="dropdown-trigger">
+                  <a class="" aria-haspopup="true" aria-controls="dropdown-menu4">
+                    <span> Reply </span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </a>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                  <div class="dropdown-content">
+                    <div class="dropdown-item">
+
+                      <form action="{% url 'detail' post.id %}" method="POST" class="">  
+
+                        {% csrf_token %}
+                      
+                      <div class="field mb-4 ">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment_id" value="{{comment.id}}">
+                        <label for="name"> Name</label>
+                        <div class="control">
+                          <input class="input is-info" name="name" type="text" placeholder="Your Name" required>
+                        </div>
+                      
+                      <article class="media mt-4">
+                        <label for="content" class="m-2"> </label>
+                        <div class="media-content">
+                          <div class="field">
+                            <p class="control">
+                              <textarea class="textarea" name="content" placeholder="Add a comment..." required></textarea>
+                            </p>
+                          </div>
+                          <nav class="level">
+                            <div class="level-left">
+                              <div class="level-item">
+                                
+                                <button class='button is-info' type="submit"> Submit</button>
+                              </div>
+                            </div>
+                            
+                          </nav>
+                        </div>
+                      </article>
+              
+                    </div>
+              
+                  </form>
+
+                    
+                  </div>
+                </div>
+              </div>
+            
+            </small> 
           </p>
         </div>
         {% if replies %}
