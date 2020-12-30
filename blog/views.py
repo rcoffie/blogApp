@@ -39,3 +39,22 @@ def PostDetail(request, id):
   context = {'post':post,'comments':comments}
 
   return render(request,'blog/detail.html',context)
+
+
+
+
+def Search(request):
+  featured_post = Post.objects.all().filter(featured_post=True)[:1]
+  posts_list = Post.objects.all()
+  paginator = Paginator(posts_list,6)
+  query = request.GET.get('q')
+  if query:
+    posts_list=Post.objects.all().filter(
+      Q(title__icontains=query)|
+      Q(body__icontains=query)
+    
+    )
+  page_number = request.GET.get('page')
+  posts = paginator.get_page(page_number)
+  context = {'posts':posts,'featured_post':featured_post}
+  return render(request,'blog/search.html',context)

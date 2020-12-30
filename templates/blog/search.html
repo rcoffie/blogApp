@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<div class="section">
+  <div class="container">
+    <div class="columns  is-multiline">
+      <div class="column is-8 ">
+
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-2by1">
+              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">John Smith</p>
+                <p class="subtitle is-6">@johnsmith</p>
+              </div>
+            </div>
+        
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+              <a href="#">#css</a> <a href="#">#responsive</a>
+              <br>
+              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="column is-4">
+
+        {% include 'partials/category.html' %}
+     
+       {% include 'partials/search_field.html'  %}
+       
+      </div>
+    </div>
+
+ 
+  </div>
+</div>
+
+
+
+<section class="section">
+  <div class="container ">
+    
+    <div class="columns is-vcentered is-multiline">
+
+      
+      {% for post in posts %}
+      <div class="column is-4">
+
+      
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="{{ post.blog_image.url }}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              
+              <div class="media-content">
+                <p class="title is-4"> <a href="{% url 'detail' post.id %}"> {{ post.title }} </a>  </p>
+                
+              </div>
+            </div>
+        
+            <div class="content">
+             {{post.body| truncatewords:20 }}
+              
+              <br>
+             
+              <p class="subtitle is-6"> Post by: {{ post.author }} <br> <time datetime="{{ post.date_posted | timesince}}" >  <small> Post Date: {{ post.date_posted | timesince}} </small>  </time> </p>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span>
+                 Author: <a href="https://twitter.com/codinghorror/status/506010907021828096">{{ post.author }}</a> 
+                </span>
+              </p>
+              <p class="card-footer-item">
+                <span>
+                  Date: <a href="#">{{ post.date_posted | timesince }}</a> 
+                </span>
+              </p>
+            </footer>
+          
+          </div>
+        </div>
+
+        
+      </div>
+      {% endfor %}
+
+       
+    
+     
+     
+    </div>
+  </div>
+
+   
+
+  <section class="section">  
+  <div class="container"> 
+    <div class="columns is-vcentered is-multiline">   
+      <div class="column is-4 ">
+
+    <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+      {% if posts.has_previous %}
+      <a href="?page={{ posts.previous_page_number }}" class="pagination-previous">Previous</a>
+      {% endif %}
+
+      {% if posts.has_next %}
+      <a href="?page={{ posts.next_page_number }}" class="pagination-previous">Next</a>
+      {% endif %}
+
+     <!--  <a class="pagination-next">Next page</a> -->
+      <ul class="pagination-list">
+        {% for p in posts.paginator.page_range %}
+        {% if posts.number == p %}
+      
+        <li>
+          <a href="?page={{ p }}" class="pagination-link is-current" aria-label="Goto page 1">{{ p }}</a>
+        </li>
+        {% else %}
+        
+      </li>
+        <a href="?page={{ p }}" class="pagination-link" aria-label="Goto page 1">{{ p }}</a>
+      </li>
+
+        {% endif %}
+        {% endfor %}
+        
+      </ul>
+    </nav>
+  </div>
+  </div>
+</div>
+  </section>
+
+  
+</section>
+  
+
+{% endblock %}
