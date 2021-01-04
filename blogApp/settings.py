@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'blog',
     'author_dash',
+    'category',
     
    
 ]
